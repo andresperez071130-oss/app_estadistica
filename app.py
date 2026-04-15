@@ -138,5 +138,21 @@ if df is not None:
     ax_z.legend()
     st.pyplot(fig_z)
 
+    from config import configurar_ia
+
+# ... (dentro de tu bloque de código después de la prueba Z)
+
+if st.button("Consultar Asistente de IA"):
+    model = configurar_ia()
+    if model:
+        try:
+            prompt = f"Realicé una prueba Z con Z={z_stat:.2f} y p={p_val:.4f}. ¿Es significativo?"
+            response = model.generate_content(prompt)
+            st.write(response.text)
+        except Exception as e:
+            st.error(f"Error: {e}")
+    else:
+        st.error("No se encontró la API Key en el archivo .env")
+
 else:
     st.info("Sube un CSV o genera datos sintéticos para habilitar los módulos.")
